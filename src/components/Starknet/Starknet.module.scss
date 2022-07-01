@@ -1,6 +1,86 @@
-.app{
+body {
+
+    background-color: #A5A4CE;
+}
+
+.app {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.box {
+    height: 500px;
+    width: 400px;
+    background-color: #C0C0C0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: white double 6px;
+    box-shadow: 0 0 0 3px #C0C0C0;
+}
+
+.connectButtons {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    margin-top: 10%;
+}
+
+.value {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    left: auto;
+    right: auto;
+    margin-top: 12%;
+    background-color: #505070;
+    width: 150px;
+    height: 150px;
+    font-size: 3rem;
+    color: #D0D0D0;
+    border: white double 6px;
+    box-shadow: 0 0 0 3px #505070;
+}
+
+.getBalance {
+    margin-top: 10%;
+}
+
+.increaseBalanceInput {
+    margin-top: 10%;
+}
+
+.input {
+    width: 150px;
+    height: 25px;
+    color: #01FFFF;
+    background-color: #0000FF;
+    font-size: 1.5rem;
+}
+
+.increaseBalanceButton {
+    margin-top: 10%;
+}
+
+
+button {
+    background-color: #008001;
+    color: white;
+    border: green outset 1px;
+    -webkit-box-shadow: 0.5em 0.5em 3px rgb(0 0 0 / 50%);
+    transition: all 0.75s ease;
+    font-family: inherit;
+}
+
+button:hover {
+    transform: translate3d(0.25em, 0.25em, 10em);
+    -webkit-box-shadow: 0 0 0 rgb(0 0 0 / 50%);
+    background-color: #33CD32;
+    transition: all 0.75s ease;
 }
