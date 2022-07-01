@@ -1,7 +1,7 @@
-import { configureStore } from '@reduxjs/toolkit'
-import counterReducer from './slicers/global'
-import nameReducer from './slicers/name'
-import starknetReducer from './slicers/starknet'
+import { configureStore } from "@reduxjs/toolkit";
+import counterReducer from "./slicers/global";
+import nameReducer from "./slicers/name";
+import starknetReducer from "./slicers/starknet";
 import { TypedUseSelectorHook, useSelector } from "react-redux";
 
 export const store = configureStore({
@@ -10,9 +10,13 @@ export const store = configureStore({
     name: nameReducer,
     starknet: starknetReducer,
   },
-})
+  middleware: (getDefaultMiddleware) => {
+    return getDefaultMiddleware({
+      serializableCheck: false,
+    });
+  },
+});
 
-export type RootState = ReturnType<typeof store.getState>
+export type RootState = ReturnType<typeof store.getState>;
 
-export type AppDispatch = typeof store.dispatch
-export const useTypedSelector: TypedUseSelectorHook<RootState> = useSelector;
+export type AppDispatch = typeof store.dispatch;

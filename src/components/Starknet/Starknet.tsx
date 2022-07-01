@@ -2,33 +2,32 @@ import styles from "./Starknet.module.scss";
 import { RootState } from "store";
 import { useSelector, useDispatch } from "react-redux";
 import { change, reset } from "store/slicers/name";
-import { connect } from "@argent/get-starknet";
-import { ConnectStarknet, walletAddress } from "./Connect";
-import { useState } from "react";
+import { useStarknetConnection } from "hooks/useStarknetConnection";
 
 const Starknet = () => {
   const dispatch = useDispatch();
+  const count = useSelector((state: RootState) => state.counter.value);
 
-  // const starknet : any = connect()
-  // // or
-  // // const starknet = connect({showList: false})
+  const { connectAccount, connectContract, getBalance, increaseBalance } = useStarknetConnection();
 
-  // if (!starknet) {
-  //   throw Error("User rejected wallet selection or silent connect found nothing")
-  // }
 
-  // await starknet.enable()
-
-  //   if(starknet.isConnected) {
-  //     // If the extension was installed and successfully connected, you have access to a starknet.js Signer object to do all kinds of requests through the user's wallet contract.
-  //     console.log("ba[landik")
-  // } else {
-  //     // In case the extension wasn't successfully connected you still have access to a starknet.js Provider to read starknet states and sent anonymous transactions
-  //     console.log("Baglanamadik")
-  // }
 
   return (
     <div className={styles.app}>
+      <button
+        onClick={() => {
+          connectAccount();
+        }}
+      >
+        Connect Account
+      </button>
+      <button
+        onClick={() => {
+          connectContract();
+        }}
+      >
+        Connect Contract
+      </button>
       <div>
         <form action="">
           <label>Increase Balance: </label>
@@ -40,18 +39,20 @@ const Starknet = () => {
               dispatch(change(value.target.value));
             }}
           ></input>
-          <button onClick={() => {}}>Increase</button>
+          <button name="data" type="button"onClick={() => increaseBalance(13)} >
+            Increase
+          </button>
         </form>
       </div>
+      <button
+        onClick={() => {
+          getBalance();
+        }}
+      >
+        Get Balance
+      </button>
       <div>
-        <button
-          onClick={() => {
-            ConnectStarknet();
-          }}
-        >
-          Get Balance
-        </button>
-        <span>{}</span>
+        <span>Value: {count}</span>
       </div>
     </div>
   );

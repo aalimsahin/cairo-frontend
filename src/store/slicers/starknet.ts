@@ -1,22 +1,27 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface ThemeState {
-  value: any;
+  account: any,
+  contract: any
 }
 
 const initialState: ThemeState ={
-  value: null,
+  account: null,
+  contract:null,
 }
 
 export const starknetSlice = createSlice({
   name: "starknet",
   initialState,
   reducers: {
-    setStarknet: (state, action: PayloadAction<any>) => {
-      state.value = action.payload;
+    setStarknetAccount: (state, action: PayloadAction<any>) => {
+      state.account = action.payload;
+    },
+    setStarknetContract: (state, action: PayloadAction<any>) => {
+      state.contract = action.payload;
     }
   }
 })
 
-export const {setStarknet} = starknetSlice.actions;
+export const {setStarknetAccount, setStarknetContract} = starknetSlice.actions;
 export default starknetSlice.reducer;
