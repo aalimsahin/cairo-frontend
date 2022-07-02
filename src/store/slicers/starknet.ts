@@ -1,14 +1,16 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface ThemeState {
-  account: any,
-  contract: any
+  account: any;
+  contract: any;
+  provider: any;
 }
 
-const initialState: ThemeState ={
+const initialState: ThemeState = {
   account: null,
-  contract:null,
-}
+  contract: null,
+  provider: null,
+};
 
 export const starknetSlice = createSlice({
   name: "starknet",
@@ -19,9 +21,13 @@ export const starknetSlice = createSlice({
     },
     setStarknetContract: (state, action: PayloadAction<any>) => {
       state.contract = action.payload;
-    }
-  }
-})
+    },
+    setStarknetProvider: (state, action: PayloadAction<any>) => {
+      state.provider = action.payload;
+    },
+  },
+});
 
-export const {setStarknetAccount, setStarknetContract} = starknetSlice.actions;
+export const { setStarknetAccount, setStarknetContract, setStarknetProvider } =
+  starknetSlice.actions;
 export default starknetSlice.reducer;

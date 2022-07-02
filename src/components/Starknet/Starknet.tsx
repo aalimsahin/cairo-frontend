@@ -3,14 +3,29 @@ import { RootState } from "store";
 import { useSelector, useDispatch } from "react-redux";
 import { change, getInput } from "store/slicers/balance";
 import { useStarknetConnection } from "hooks/useStarknetConnection";
+import { useConnectStarknetAccount } from "hooks/useConnectStarknetAccount";
+import { useConnectStarknetContract } from "hooks/useConnectStarknetContract";
+import { useConnectStarknetProvider } from "hooks/useConnectStarknetProvider";
+import { useGetBalance } from "hooks/useGetBalance";
+import { useIncreaseBalance } from "hooks/useIncreaseBalance";
+import { useEffect } from "react";
+
+import { BALANCE } from "constants/starknet_abi";
+import { STARKNET_CONTRACTS } from "constants/addresses";
 
 const Starknet = () => {
   const dispatch = useDispatch();
   const count = useSelector((state: RootState) => state.balance.value);
   const input = useSelector((state: RootState) => state.balance.input);
 
-  const { connectAccount, connectContract, getBalance, increaseBalance } =
-    useStarknetConnection();
+  const { connectAccount } = useConnectStarknetAccount();
+  const { connectProvider } = useConnectStarknetProvider();
+  const { getBalanceWithAccount, getBalanceWithProvider } = useGetBalance();
+  const { increaseBalance } = useIncreaseBalance();
+
+  useEffect(() => {
+    getBalanceWithProvider(STARKNET_CONTRACTS.BALANCE, "get_balance");
+  }, []);
 
   return (
     <div className={styles.app}>
@@ -30,7 +45,7 @@ const Starknet = () => {
         <div className={styles.getBalance}>
           <button
             onClick={() => {
-              getBalance();
+              getBalanceWithAccount(STARKNET_CONTRACTS.BALANCE, "get_balance");
             }}
           >
             Get Balance
@@ -55,7 +70,13 @@ const Starknet = () => {
           <button
             name="data"
             type="button"
-            onClick={() => increaseBalance(Number(input))}
+            onClick={() =>
+              increaseBalance(
+                STARKNET_CONTRACTS.BALANCE,
+                "increase_balance",
+                Number(input)
+              )
+            }
           >
             Increase Balance
           </button>

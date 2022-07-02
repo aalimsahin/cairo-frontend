@@ -6,7 +6,7 @@ export interface BalanceState {
 }
 
 const initialState: BalanceState = {
-  value: 0.1,
+  value: 0,
   input: "",
 };
 
