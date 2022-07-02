@@ -73,14 +73,14 @@ button {
     background-color: #008001;
     color: white;
     border: green outset 1px;
-    -webkit-box-shadow: 0.5em 0.5em 3px rgb(0 0 0 / 50%);
+    box-shadow: 0.5em 0.5em 3px rgb(0 0 0 / 50%);
     transition: all 0.75s ease;
     font-family: inherit;
 }
 
 button:hover {
     transform: translate3d(0.25em, 0.25em, 10em);
-    -webkit-box-shadow: 0 0 0 rgb(0 0 0 / 50%);
+    box-shadow: 0 0 0 rgb(0 0 0 / 50%);
     background-color: #33CD32;
     transition: all 0.75s ease;
 }
