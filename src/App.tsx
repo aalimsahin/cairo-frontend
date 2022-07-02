@@ -1,9 +1,9 @@
-import {Storage, Name, Counter, Starknet} from "./components";
+import { Starknet } from "./components";
 
 function App() {
   return (
     <div>
-      <Starknet/>
+      <Starknet />
     </div>
   );
 }

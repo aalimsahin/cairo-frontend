@@ -9,7 +9,7 @@ import {
   setStarknetAccount,
   setStarknetContract,
 } from "store/slicers/starknet";
-import { change } from "store/slicers/global";
+import { change } from "store/slicers/balance";
 import { RootState } from "store";
 export const useStarknetConnection = () => {
   const dispatch = useDispatch();
@@ -26,7 +26,7 @@ export const useStarknetConnection = () => {
     }
     if (starknet.isConnected) {
       dispatch(setStarknetAccount(starknet));
-      console.log(starknet.account.signer.keyPair)
+      console.log(starknet.account.signer.keyPair);
     } else {
       console.log("Baglanamadik");
     }
@@ -52,11 +52,11 @@ export const useStarknetConnection = () => {
     } else {
       const res = await Values.contract.get_balance();
       console.log(res.res.words[0]);
-      dispatch(change(res.res.words[0]))
+      dispatch(change(res.res.words[0]));
     }
   };
 
-  const increaseBalance = async (number:number) => {
+  const increaseBalance = async (number: number) => {
     if (!Values.contract) {
       return;
     } else {
@@ -72,12 +72,9 @@ export const useStarknetConnection = () => {
       //   STARKNET_CONTRACTS.STORAGE,
       //   Values.account.provider
       // );
-      await Values.contract.increase_balance("13",
-          {
-            max_fee: 2000000000000000,
-          }
-      );
-
+      await Values.contract.increase_balance("13", {
+        max_fee: 2000000000000000,
+      });
     }
   };
 

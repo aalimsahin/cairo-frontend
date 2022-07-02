@@ -1,12 +1,14 @@
 import styles from "./Starknet.module.scss";
 import { RootState } from "store";
 import { useSelector, useDispatch } from "react-redux";
-import { change, reset } from "store/slicers/name";
+import { change, getInput } from "store/slicers/balance";
 import { useStarknetConnection } from "hooks/useStarknetConnection";
+import { useState } from "react";
 
 const Starknet = () => {
   const dispatch = useDispatch();
-  const count = useSelector((state: RootState) => state.counter.value);
+  const count = useSelector((state: RootState) => state.balance.value);
+  const input = useSelector((state: RootState) => state.balance.input);
 
   const { connectAccount, connectContract, getBalance, increaseBalance } =
     useStarknetConnection();
@@ -52,13 +54,17 @@ const Starknet = () => {
               id="fname"
               name="fname"
               onChange={(value) => {
-                dispatch(change(value.target.value));
+                dispatch(getInput(value.target.value));
               }}
             ></input>
           </form>
         </div>
         <div className={styles.increaseBalanceButton}>
-          <button name="data" type="button" onClick={() => increaseBalance(13)}>
+          <button
+            name="data"
+            type="button"
+            onClick={() => increaseBalance(Number(input))}
+          >
             Increase Balance
           </button>
         </div>

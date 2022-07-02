@@ -1,14 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
-import counterReducer from "./slicers/global";
-import nameReducer from "./slicers/name";
 import starknetReducer from "./slicers/starknet";
-import { TypedUseSelectorHook, useSelector } from "react-redux";
+import balanceReducer from "./slicers/balance";
 
 export const store = configureStore({
   reducer: {
-    counter: counterReducer,
-    name: nameReducer,
     starknet: starknetReducer,
+    balance: balanceReducer,
   },
   middleware: (getDefaultMiddleware) => {
     return getDefaultMiddleware({
