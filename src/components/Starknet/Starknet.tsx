@@ -3,7 +3,6 @@ import { RootState } from "store";
 import { useSelector, useDispatch } from "react-redux";
 import { change, getInput } from "store/slicers/balance";
 import { useStarknetConnection } from "hooks/useStarknetConnection";
-import { useState } from "react";
 
 const Starknet = () => {
   const dispatch = useDispatch();
@@ -23,13 +22,6 @@ const Starknet = () => {
             }}
           >
             Connect Account
-          </button>
-          <button
-            onClick={() => {
-              connectContract();
-            }}
-          >
-            Connect Contract
           </button>
         </div>
         <div className={styles.value}>

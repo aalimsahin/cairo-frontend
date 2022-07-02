@@ -26,7 +26,7 @@ export const useStarknetConnection = () => {
     }
     if (starknet.isConnected) {
       dispatch(setStarknetAccount(starknet));
-      console.log(starknet.account.signer.keyPair);
+      console.log(starknet);
     } else {
       console.log("Baglanamadik");
     }
@@ -47,12 +47,16 @@ export const useStarknetConnection = () => {
   };
 
   const getBalance = async () => {
-    if (!Values.contract) {
+    if (!Values.account) {
       return;
     } else {
-      const res = await Values.contract.get_balance();
-      console.log(res.res.words[0]);
-      dispatch(change(res.res.words[0]));
+      // const res = await Values.contract.get_balance();
+      const res: any = await Values.account.provider.callContract({
+        contractAddress: STARKNET_CONTRACTS.STORAGE,
+        entrypoint: "get_balance",
+      });
+      console.log(res);
+      dispatch(change(parseInt(res.result[0], 16)));
     }
   };
 
@@ -60,31 +64,17 @@ export const useStarknetConnection = () => {
     if (!Values.contract) {
       return;
     } else {
-      // Values.contract.connect(Values.account.account);
-      // const res = await Values.contract.estimateFee.increase_balance(
-      //   number,
-      //   {
-      //     max_fee: 2000000000000,
-      //   }
-      // );
-      // Values.contract = const ctc: any = new StarknetContract(
-      //   STORAGE as any,
-      //   STARKNET_CONTRACTS.STORAGE,
-      //   Values.account.provider
-      // );
-      await Values.contract.increase_balance("13", {
-        max_fee: 2000000000000000,
+      // await Values.contract.increase_balance("13", {
+      //   max_fee: 2000000000000000,
+      // });
+      const txDetails: any = await Values.account.account.execute({
+        contractAddress: STARKNET_CONTRACTS.STORAGE,
+        entrypoint: "increase_balance",
+        calldata: [number],
       });
+      console.log("tx: ", txDetails);
     }
   };
 
   return { connectAccount, connectContract, getBalance, increaseBalance };
 };
-
-// export const walletAddress = async (): Promise<string | undefined> => {
-//   const starknet = await getStarknet();
-//   if (!starknet?.isConnected) {
-//     return;
-//   }
-//   return starknet.selectedAddress;
-// };
